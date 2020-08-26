@@ -1,0 +1,12 @@
+image: docker:stable
+
+stages:
+  - test
+
+unit_test:
+  image: golang:1.14-alpine
+  stage: test
+  only:
+    - merge_requests
+  script:
+    - go test ./...
