@@ -59,7 +59,7 @@ func TestBookService_ReviewBook(t *testing.T) {
 			err := svc.ReviewBook(tt.args.id, tt.args.point)
 
 			assert.Nil(t, err)
-			assert.Equal(t, demoBook.PointShow, 3.9)
+			assert.Equal(t, demoBook.PointShow, 3.9999)
 		})
 	}
 }
