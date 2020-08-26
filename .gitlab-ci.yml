@@ -4,7 +4,7 @@ stages:
   - test
 
 unit_test:
-  image: golang:1.14-alpine
+  image: golang:1.14
   stage: test
   only:
     - merge_requests
