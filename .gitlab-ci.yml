@@ -10,3 +10,4 @@ unit_test:
     - merge_requests
   script:
     - go test ./...
+    - echo "TEST DONE"
