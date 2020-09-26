@@ -12,7 +12,7 @@ unit_test:
   script:
     - go mod download
     - mkdir coverage || true
-    - go test -coverprofile=coverage/cover.out ./...
+    - go test -v -coverprofile=coverage/cover.out ./...
     - go tool cover -html=coverage/cover.out -o coverage/cover.html
     - echo "TEST DONE!"
   coverage: '/^coverage:\s(\d+(?:\.\d+)?%)/'
