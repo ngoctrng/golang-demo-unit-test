@@ -2,6 +2,7 @@ image: docker:stable
 
 stages:
   - test
+  - deploy
 
 unit_test:
   image: golang:1.14
@@ -9,5 +10,24 @@ unit_test:
   only:
     - merge_requests
   script:
-    - go test ./...
-    - echo "TEST DONE"
+    - go mod download
+    - mkdir coverage || true
+    - go test -v -coverprofile=coverage/cover.out ./...
+    - go tool cover -html=coverage/cover.out -o coverage/cover.html
+    - echo "TEST DONE!"
+  coverage: '/^coverage:\s(\d+(?:\.\d+)?%)/'
+  artifacts:
+    paths:
+      - coverage/
+
+pages:
+  stage: deploy
+  only:
+    - merge_requests
+  script:
+    - mkdir public || true
+    - cp coverage/cover.html public/index.html
+  artifacts:
+    paths:
+      - public
+    expire_in: 30 days
